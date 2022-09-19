@@ -22,6 +22,7 @@ impl bord::Grid for Grid {
             }
         }
     }
+
     fn put(&mut self, color: Color) -> bool {
         if self.on_disc {
             return false;
@@ -29,5 +30,9 @@ impl bord::Grid for Grid {
         self.on_disc = true;
         self.disc_color = Some(color);
         return true;
+    }
+
+    fn is_on_disc(&self) -> bool {
+        self.on_disc
     }
 }

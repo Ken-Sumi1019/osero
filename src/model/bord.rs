@@ -2,12 +2,13 @@ use super::grid;
 
 #[allow(unused)]
 pub struct Bord {
-    list: Vec<Vec<Box<dyn Grid>>>,
+    pub list: Vec<Vec<Box<dyn Grid>>>,
 }
 
 pub trait Grid {
     fn flip(&mut self);
     fn put(&mut self, color: grid::Color) -> bool;
+    fn is_on_disc(&self) -> bool;
 }
 
 pub fn build_bord() -> Bord {
@@ -29,11 +30,19 @@ pub fn build_bord() -> Bord {
 }
 
 impl Bord {
-    fn put(&mut self, horizontal: usize, vertical: usize, color: grid::Color) -> bool {
+    pub fn put(&mut self, horizontal: usize, vertical: usize, color: grid::Color) -> bool {
         self.list[horizontal][vertical].put(color)
     }
 
-    fn put_as_name(&mut self, horizontal: char, vertical: usize, color: grid::Color) -> bool {
-        self.list[horizontal as usize][vertical].put(color)
+    pub fn put_as_name(&mut self, horizontal: char, vertical: usize, color: grid::Color) -> bool {
+        self.list[horizontal as usize - 97][vertical - 1].put(color)
+    }
+
+    pub fn get(&self, horizontal: usize, vertical: usize) -> &Box<dyn Grid> {
+        &self.list[horizontal][vertical]
+    }
+
+    pub fn get_as_name(&self, horizontal: char, vertical: usize) -> &Box<dyn Grid> {
+        &self.list[horizontal as usize - 97][vertical - 1]
     }
 }
