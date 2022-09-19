@@ -9,6 +9,7 @@ pub trait Grid {
     fn flip(&mut self);
     fn put(&mut self, color: grid::Color) -> bool;
     fn is_on_disc(&self) -> bool;
+    fn disc_color(&self) -> &grid::Color;
 }
 
 pub fn build_bord() -> Bord {
@@ -35,7 +36,7 @@ impl Bord {
     }
 
     pub fn put_as_name(&mut self, horizontal: char, vertical: usize, color: grid::Color) -> bool {
-        self.list[horizontal as usize - 97][vertical - 1].put(color)
+        self.list[(horizontal as usize) - 97][vertical - 1].put(color)
     }
 
     pub fn get(&self, horizontal: usize, vertical: usize) -> &Box<dyn Grid> {
@@ -43,6 +44,6 @@ impl Bord {
     }
 
     pub fn get_as_name(&self, horizontal: char, vertical: usize) -> &Box<dyn Grid> {
-        &self.list[horizontal as usize - 97][vertical - 1]
+        &self.list[(horizontal as usize) - 97][vertical - 1]
     }
 }

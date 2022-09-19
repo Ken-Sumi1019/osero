@@ -6,6 +6,7 @@ pub struct Grid {
     pub disc_color: Option<Color>,
 }
 
+#[derive(PartialEq, Debug)]
 pub enum Color {
     Black,
     White,
@@ -34,5 +35,9 @@ impl bord::Grid for Grid {
 
     fn is_on_disc(&self) -> bool {
         self.on_disc
+    }
+
+    fn disc_color(&self) -> &Color {
+        &self.disc_color.as_ref().unwrap()
     }
 }
